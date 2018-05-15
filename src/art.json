@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Alex Bregman",
+    "picture": "images/AlexBregman.jpg",
+    "price": 30
+  },
+  {
+    "id": 2,
+    "name": "Andrew Benintendi",
+    "picture": "images/AndrewBenintendi.jpg",
+    "price": 20
+  },
+  {
+    "id": 3,
+    "name": "David Dahl",
+    "picture": "images/DavidDahl.jpg",
+    "price": 25
+  },
+  {
+    "id": 4,
+    "name": "David Ortiz",
+    "picture": "images/DavidOrtiz.jpg",
+    "price": 30
+  },
+  {
+    "id": 5,
+    "name": "Derek Jeter",
+    "picture": "images/DerekJeter.jpg",
+    "price": 20
+  },
+  {
+    "id": 6,
+    "name": "Francisco Lindor",
+    "picture": "images/FranciscoLindor.jpg",
+    "price": 10
+  },
+  {
+    "id": 7,
+    "name": "Jacoby Jones",
+    "picture": "images/JacobyJones.jpg",
+    "price": 20
+  },
+  {
+    "id": 8,
+    "name": "John Smoltz",
+    "picture": "images/JohnSmoltz.jpg",
+    "price": 15
+  },
+  {
+    "id": 9,
+    "name": "Josh Bell",
+    "picture": "images/JoshBell.jpg",
+    "price": 25
+  },
+  {
+    "id": 10,
+    "name": "Orlando Arcia",
+    "picture": "images/OrlandoArcia.jpg",
+    "price": 10
+  },
+  {
+    "id": 11,
+    "name": "Tyler Austin",
+    "picture": "images/TylerAustin.jpg",
+    "price": 15
+  },
+  {
+    "id": 12,
+    "name": "Tyler Glasnow",
+    "picture": "images/TylerGlasnow.jpg",
+    "price": 20
+  }
+]
