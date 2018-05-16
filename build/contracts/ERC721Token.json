@@ -491,11 +491,11 @@
           }
         ],
         "contractDependencies": [
+          1297,
           580,
           600,
           607,
-          714,
-          1297
+          714
         ],
         "contractKind": "contract",
         "documentation": "@title Full ERC721 Token\nThis implementation includes all the required and some optional functionality of the ERC721 standard\nMoreover, it includes approve all functionality using operator terminology\n@dev see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -5075,11 +5075,11 @@
           }
         ],
         "contractDependencies": [
+          1297,
           580,
           600,
           607,
-          714,
-          1297
+          714
         ],
         "contractKind": "contract",
         "documentation": "@title Full ERC721 Token\nThis implementation includes all the required and some optional functionality of the ERC721 standard\nMoreover, it includes approve all functionality using operator terminology\n@dev see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md",
@@ -9571,5 +9571,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-05-15T07:42:08.036Z"
+  "updatedAt": "2018-05-16T07:50:18.437Z"
 }

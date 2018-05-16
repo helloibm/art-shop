@@ -54,9 +54,9 @@ contract TokenAuction {
         auction.seller = msg.sender; //TEMP
         auction.sold = true;
         tokenIdToAuction[_tokenId] = auction; //TEMP        
-        //nonFungibleContract.approve(escrow, _tokenId);
+        //nonFungibleContract.approve(msg.sender, _tokenId);
         //nonFungibleContract.transferFrom(seller, msg.sender, _tokenId);
-
+        //delete tokenIdToAuction[_tokenId];
     }
 
     function cancel( uint256 _tokenId ) public {
