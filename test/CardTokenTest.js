@@ -1,16 +1,16 @@
-const ArtToken = artifacts.require("ArtToken");
-//import ArtToken from "ArtToken";
+const CardToken = artifacts.require("CardToken");
+//import CardToken from "CardToken";
 
-contract("Art Token", accounts => {
+contract("Card Token", accounts => {
     /*
     it("Should make first account an owner", async () => {
-        let instance = await ArtToken.deployed();
+        let instance = await CardToken.deployed();
         let owner = await instance.owner();
         assert.equal(owner, accounts[0]);
     });
     
     it("creates token with specified art attributes", async () => {
-          let instance = await ArtToken.deployed();
+          let instance = await CardToken.deployed();
           let owner = await instance.owner();
       
           let count1 = await instance.totalSupply();
@@ -31,7 +31,7 @@ contract("Art Token", accounts => {
     
    
     it("allows to mint only to owner", async () => {
-        let instance = await ArtToken.deployed();
+        let instance = await CardToken.deployed();
         let other = accounts[1];
 
         await instance.mint("4", "Hamza", "URL4", 40);

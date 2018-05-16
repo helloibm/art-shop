@@ -1,5 +1,5 @@
 
-const ArtToken = artifacts.require("ArtToken");
+const CardToken = artifacts.require("CardToken");
 const TokenAuction = artifacts.require("TokenAuction");
 
 contract("Token Auction", accounts => {
@@ -10,7 +10,7 @@ contract("Token Auction", accounts => {
     
     it("Should accept nft on creation", async () => {
 
-        let nft = await ArtToken.new("ArtToken", "ART");
+        let nft = await CardToken.new("CardToken", "CT");
         let auction = await TokenAuction.new(nft.address);
         const nftAddr = await auction.nonFungibleContract();
         //console.log(nft.address);
@@ -20,17 +20,24 @@ contract("Token Auction", accounts => {
     
     it("Should transfer ownership", async () => {
 
-        let nft = await ArtToken.deployed();
-        token = await nft.getArt(1);
+        let nft = await CardToken.deployed();
+        token = await nft.getCard(1);
         console.log("token at 0 - BEFORE");
         console.log(token);
-        
+
         await nft.approve(buyer, 1);
         await nft.transferFrom(owner, buyer, 1);
-
-        token = await nft.getArt(1);
+        token = await nft.getCard(1);
         console.log("token at 0 - AFTER");
         console.log(token);
+
+        await nft.approve(owner, 1);
+        await nft.transferFrom(buyer, owner, 1);
+        token = await nft.getCard(1);
+        console.log("token at 0 - RETURN");
+        console.log(token);
+
+
 
         /*
         let nft = await ArtToken.new("ArtToken", "ART");
