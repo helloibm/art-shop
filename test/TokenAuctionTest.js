@@ -1,6 +1,11 @@
 
-const CardToken = artifacts.require("CardToken");
-const TokenAuction = artifacts.require("TokenAuction");
+//import CardToken from "CardToken";
+//import TokenAuction from "TokenAuction";
+
+import 'babel-polyfill'; //need this bcz the first function is an async https://github.com/babel/babel/issues/5085
+
+const CardToken = artifacts.require("CardToken"); //this artifact.require is truffle specific
+const TokenAuction = artifacts.require("TokenAuction"); //this artifact.require is truffle specific
 
 contract("Token Auction", accounts => {
     let owner = accounts[0];
@@ -9,7 +14,6 @@ contract("Token Auction", accounts => {
     console.log("buyer - " + buyer);
     
     it("Should accept nft on creation", async () => {
-
         let nft = await CardToken.new("CardToken", "CT");
         let auction = await TokenAuction.new(nft.address);
         const nftAddr = await auction.nonFungibleContract();
@@ -40,7 +44,7 @@ contract("Token Auction", accounts => {
 
 
         /*
-        let nft = await ArtToken.new("ArtToken", "ART");
+        let nft = await CardToken.new("CardToken", "Card");
         let auction = await TokenAuction.new(nft.address);
         //const nftAddr = await auction.nonFungibleContract();
         await nft.mint(1, "Bashir", "Bashir", 100);
@@ -61,10 +65,10 @@ contract("Token Auction", accounts => {
         let nft, auctionContract, token;
 
         before(async () => {
-            //let instance = await ArtToken.deployed();
+            //let instance = await CardToken.deployed();
             //let auctionContract = await TokenAuction.deployed();
             //let owner = await instance.owner();      
-            nft = await ArtToken.new("ArtToken", "ART");
+            nft = await CardToken.new("CardToken", "Card");
             auctionContract = await TokenAuction.new(nft.address);
             console.log(auctionContract.address);
                         

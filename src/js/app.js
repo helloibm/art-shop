@@ -49,7 +49,7 @@ App = {
     });
 
     //Init Card Token
-    $.getJSON('CardToken.json', function(data) {
+    $.getJSON('/abi/CardToken.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with truffle-contract
       App.contracts.CardToken = TruffleContract(data);    
       // Set the provider for our contract
@@ -85,7 +85,7 @@ App = {
     catch(err) { console.log(err); alert(err); return; }
 
     //Once all the tokens are fetched, fetch auction related details
-    $.getJSON('TokenAuction.json', function(data) {
+    $.getJSON('/abi/TokenAuction.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with truffle-contract
       App.contracts.TokenAuction = TruffleContract(data);    
       // Set the provider for our contract
@@ -182,13 +182,21 @@ App = {
 
     var cardId = parseInt($(event.target).data('id'));
     var cardPrice = parseInt($(event.target).data('price'));
-    auctionInstance.sell(cardId, cardPrice).then(function(result) {
-      alert('item listed for auction.');
-      console.log(result);
+    tokenInstance.approve(addresses.auctionAddress, cardId).then(function(result){
+      //alert('item approved for auction.');
+      auctionInstance.sell(cardId, cardPrice).then(function(result) {
+        alert('item listed for auction.');
+        console.log(result);
+      }).catch(function(err){
+        console.log(err);
+        alert(err);      
+      });
+
     }).catch(function(err){
       console.log(err);
       alert(err);      
     });
+    
 
   },
 

@@ -7,16 +7,20 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "lite-server",
+    "dev": "rimraf src\\abi\\* && xcopy build\\contracts src\\abi /F /Y && lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "lite-server": "^2.3.0"
   },
   "dependencies": {
     "copy": "^0.3.2",
+    "rimraf": "^2.6.2",
     "zeppelin-solidity": "^1.8.0"
   }
 }

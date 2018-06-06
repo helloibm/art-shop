@@ -1,5 +1,5 @@
-const CardToken = artifacts.require("CardToken");
-//import CardToken from "CardToken";
+//const CardToken = artifacts.require("CardToken");
+import CardToken from "../build/contracts/CardToken.json";
 
 contract("Card Token", accounts => {
     /*

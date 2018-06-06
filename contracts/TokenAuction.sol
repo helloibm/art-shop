@@ -5,7 +5,7 @@ import "zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol";
 contract TokenAuction {
 
     ERC721 public nonFungibleContract;
-    address escrow = 0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f;
+    address _escrow = 0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f;
 
     struct Auction {
         address owner;
@@ -20,20 +20,33 @@ contract TokenAuction {
         nonFungibleContract = ERC721(_nftAddress);
     }
     
-    function createAuction( uint256 _tokenId, uint128 _price ) public {
-        
+    /// @dev Returns true if the claimant owns the token.
+    /// @param _claimant - Address claiming to own the token.
+    /// @param _tokenId - ID of token whose ownership to verify.
+    function _owns(address _claimant, uint256 _tokenId) internal view returns (bool) {
+        return (nonFungibleContract.ownerOf(_tokenId) == _claimant);
+    }
+
+    function createAuction( uint256 _tokenId, uint128 _price ) internal {
+        //nonFungibleContract.takeOwnership(_tokenId); //this does not work anymore
         Auction memory _auction = Auction({
             owner: msg.sender, //[this] is the address of the current contract. [TEMP: replacing this with msg.sender]
             seller: msg.sender, //msg.sender is the caller
             price: uint128(_price),
             sold: false
         });
-        tokenIdToAuction[_tokenId] = _auction;        
-        //nonFungibleContract.approve(this, _tokenId);
-        
+        tokenIdToAuction[_tokenId] = _auction;
+    }
+    function escrow(address _from, uint256 _tokenId) internal {
+        address _contract = address(this);
+        //nonFungibleContract.approve(_contract, _tokenId); //cannot call approve like this bcz approves expect msg.sender to be the NFT owner. However calling second contract like this makes msg.sender this contract address
+        nonFungibleContract.transferFrom(_from, _contract, _tokenId);
     }
 
     function sell( uint256 _tokenId, uint128 _price ) public {
+        require(_owns(msg.sender, _tokenId));        
+        //escrow(msg.sender, _tokenId);
+
         createAuction(_tokenId, _price);
     }
 
@@ -50,13 +63,14 @@ contract TokenAuction {
         //delete tokenIdToAuction[_tokenId];
 
         seller.transfer(msg.value);
-        auction.owner = msg.sender; //TEMP
-        auction.seller = msg.sender; //TEMP
-        auction.sold = true;
-        tokenIdToAuction[_tokenId] = auction; //TEMP        
+        //auction.owner = msg.sender; //TEMP
+        //auction.seller = msg.sender; //TEMP
+        //auction.sold = true;
+        //tokenIdToAuction[_tokenId] = auction; //TEMP        
         //nonFungibleContract.approve(msg.sender, _tokenId);
-        //nonFungibleContract.transferFrom(seller, msg.sender, _tokenId);
-        //delete tokenIdToAuction[_tokenId];
+        nonFungibleContract.transferFrom(seller, msg.sender, _tokenId); //we only approved this contract address and did not transfer ownership. so using seller instead of address(this)
+        //nonFungibleContract.transfer(msg.sender, _tokenId); //transfer from the contract address to the buyer.
+        delete tokenIdToAuction[_tokenId];
     }
 
     function cancel( uint256 _tokenId ) public {
@@ -66,7 +80,7 @@ contract TokenAuction {
 
         delete tokenIdToAuction[_tokenId];
 
-        nonFungibleContract.transferFrom(auction.seller, auction.owner, _tokenId);
+        nonFungibleContract.transferFrom(this, auction.seller, _tokenId);
 
     }
 
