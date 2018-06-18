@@ -24,7 +24,8 @@ contract CardToken is ERC721Token, Ownable {
         symbol = _symbol;
     }
 
-    function mint(uint _id, string _name, string _picture, uint _price) public onlyOwner {
+    //function mint(uint _id, string _name, string _picture, uint _price) public onlyOwner {
+    function mint(uint _id, string _name, string _picture, uint _price) public {
         Card memory _card = Card({ id: _id, name: _name, picture: _picture, price: _price });
         uint _cardId = cards.push(_card) - 1;
 

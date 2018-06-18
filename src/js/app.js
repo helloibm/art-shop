@@ -76,6 +76,7 @@ App = {
     try {
       
       let cardCount = await tokenInstance.totalTokens.call();
+      console.log("Total Cards - " + cardCount);
       
       for (i = 0; i < cardCount; i ++) {
         let card = await tokenInstance.getCard(i);
@@ -200,9 +201,41 @@ App = {
 
   },
 
+  handleMint: function(event) {
+
+    event.preventDefault();
+
+    tokenInstance.mint(102,  "Fani Ortiz", "images/DavidOrtiz.jpg", 50).then(function(result){
+        alert('item minted.');
+        console.log(result);      
+    }).catch(function(err){
+      console.log(err);
+      alert(err);      
+    });
+    
+
+  },
+
+  handleChange: function(event) {
+
+    event.preventDefault();
+
+    auctionInstance.changePrice(1, 500).then(function(result){
+        alert('item price changed.');
+        console.log(result);      
+    }).catch(function(err){
+      console.log(err);
+      alert(err);      
+    });
+    
+
+  },
+
   bindEvents: function() {
     $(document).on('click', '.btn-buy', App.handleBuy);
     $(document).on('click', '.btn-sell', App.handleSell);
+    $(document).on('click', '.btn-mint', App.handleMint);
+    $(document).on('click', '.btn-change', App.handleChange);
   },
 
 };

@@ -73,6 +73,13 @@ contract TokenAuction {
         delete tokenIdToAuction[_tokenId];
     }
 
+    function changePrice(uint256 _tokenId, uint128 price) public payable{
+        require(_owns(msg.sender, _tokenId));
+        Auction memory auction = tokenIdToAuction[_tokenId];
+        auction.price = price;
+        tokenIdToAuction[_tokenId] = auction;
+    }
+
     function cancel( uint256 _tokenId ) public {
         
         Auction memory auction = tokenIdToAuction[_tokenId];
